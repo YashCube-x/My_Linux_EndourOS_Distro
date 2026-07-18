@@ -1,90 +1,137 @@
-# Hyprland dotfiles — calm-slate rice
+# My Linux EndeavourOS Distro — Hyprland Calm-Slate Rice
 
-A full Hyprland desktop setup for Arch/EndeavourOS: Hyprland (native Lua config) +
-Waybar (with Quickshell as an on-demand alternate shell) + Kitty + Wofi + Mako +
-Neovim + zsh/Starship, all on one consistent "calm slate" color palette.
+A complete Hyprland desktop setup: Hyprland (native Lua config) + Waybar (with
+Quickshell as an on-demand alternate shell) + Kitty + Wofi + Mako + Neovim +
+zsh/Starship, all on one consistent "calm slate" color palette — plus
+`hypridle`/`hyprlock`, a wallpaper picker, screenshot annotation, screen
+recording, GTK theming, and 80+ keybindings (press `SUPER+H` any time for the
+full list).
+
+There are two ways to set this up: **do it yourself step by step**, or
+**hand it to an AI CLI (Claude Code / Gemini CLI) and let it do the work**.
+
+---
+
+## Option A: Do it yourself
+
+### Step 1 — Install EndeavourOS
+
+Download the ISO from [endeavouros.com](https://endeavouros.com/), flash it
+to a USB drive (`dd`, or [Rufus](https://rufus.ie/) on Windows), boot from
+it, and go through the installer. Pick any desktop option during install
+(or "No Desktop") — this repo replaces whatever it sets up.
+
+*(Using plain Arch instead? Follow the
+[Arch install guide](https://wiki.archlinux.org/title/Installation_guide),
+then install an AUR helper yourself before Step 3:)*
+```bash
+sudo pacman -S --needed base-devel git
+git clone https://aur.archlinux.org/yay.git
+cd yay && makepkg -si
+```
+
+### Step 2 — Pull this repo
+
+Once you're booted in and logged into a terminal, with internet working:
+
+```bash
+git clone https://github.com/YashCube-x/My_Linux_EndourOS_Distro.git ~/dotfiles
+```
+
+### Step 3 — Run the installer
+
+```bash
+cd ~/dotfiles
+./install.sh
+```
+
+This installs every package the setup needs (via `pacman` and `yay`),
+symlinks all the configs into `~/.config/`, enables the required system
+services, and applies the GTK theme. Reboot (or log out and back in) once
+it finishes.
+
+---
+
+## Option B: Let an AI CLI do it for you
+
+If you have (or are willing to install) **Claude Code** or **Gemini CLI**,
+you can skip doing this by hand — install whichever one, open a terminal in
+your home directory, run it, and paste the prompt below. It will clone the
+repo, read this README, run the installer, and — unlike a plain script —
+actually troubleshoot anything that goes wrong (missing packages, `sudo`
+password prompts it can't answer itself, a config that doesn't apply
+cleanly, etc.) instead of just failing silently.
+
+**Install one of these first:**
+- Claude Code: `npm install -g @anthropic-ai/claude-code` (needs Node.js:
+  `sudo pacman -S nodejs npm` first if you don't have it), then run `claude`
+- Gemini CLI: `npm install -g @google/gemini-cli`, then run `gemini`
+
+**Then paste this prompt:**
+
+```
+Clone https://github.com/YashCube-x/My_Linux_EndourOS_Distro.git into
+~/dotfiles (skip if it's already there), read its README.md for context,
+then run ./install.sh to set up this Hyprland desktop environment.
+
+Rules for you to follow while doing this:
+- You almost certainly can't run `sudo` interactively yourself (no real
+  TTY for password prompts). When a command needs sudo, tell me the exact
+  command and ask me to run it in my own terminal, then wait for me to
+  confirm before continuing.
+- After I say a step is "done", verify it actually happened yourself
+  (check the package is installed, check the service is running, etc.)
+  rather than just trusting my word — I might be wrong about what
+  finished.
+- If something errors, don't just retry blindly — read the actual error,
+  explain what's wrong in plain terms, and fix the root cause.
+- If a step is destructive or affects things outside this setup, ask me
+  before doing it.
+- Once install.sh finishes, reload/restart the relevant services and
+  actually confirm the desktop looks right (e.g. screenshot the bar,
+  check hyprctl for config errors) instead of assuming it worked.
+- Ask me before installing anything not already listed in this repo's
+  install.sh or README.
+```
+
+---
 
 ## What's in here
 
 | Path | What it is |
 |---|---|
-| `config/hypr/` | `hyprland.lua` (compositor config, 80+ keybinds, animations, blur, tiling controls), `hyprlock.conf`, `hyprpaper.conf`, `hypridle.conf` (auto lock/dim/suspend), `scripts/` (smart volume/brightness/menu/powermenu wrappers, wallpaper picker, keybind cheat-sheet, battery warning, screen-record toggle), `wallpaper/` (4 wallpapers, switch with `SUPER+W`) |
-| `config/waybar/` | Bar config + calm-slate `style.css` + `scripts/` (volume/brightness sliders via `yad`, WiFi popup via `nmcli`+`wofi`, clipboard picker via `cliphist`, notification toggle) |
+| `config/hypr/` | `hyprland.lua` (compositor config, 80+ keybinds, animations, blur, tiling controls), `hyprlock.conf`, `hyprpaper.conf`, `hypridle.conf` (auto lock/dim/suspend), `scripts/` (smart volume/brightness/menu/powermenu wrappers, wallpaper picker, keybind cheat-sheet, battery warning, screen-record toggle), `wallpaper/` (switch with `SUPER+W`) |
+| `config/waybar/` | Bar config + calm-slate `style.css` + `scripts/` (volume/brightness sliders via `yad`, WiFi popup via `nmcli`+`wofi`, Bluetooth popup via `bluetoothctl`+`wofi`, clipboard picker via `cliphist`, notification toggle) |
 | `config/kitty/` | Terminal config, Catppuccin Mocha colors, JetBrains Mono Nerd Font |
 | `config/wofi/` | App launcher styling |
 | `config/mako/` | Notification daemon styling |
-| `config/quickshell/` | Alternate native shell (QML) — control center, OSD, GPU switcher, clipboard manager. Toggle with `SUPER+SHIFT+Q` or the waybar power-menu's "battery mode" button. Adapted from [matteogini/dotfiles](https://github.com/matteogini/dotfiles). |
+| `config/quickshell/` | Alternate native shell (QML) — control center, OSD, GPU switcher, clipboard manager. Toggle with `SUPER+SHIFT+Q`. Adapted from [matteogini/dotfiles](https://github.com/matteogini/dotfiles). |
 | `config/wlogout/` | Centered 4-option power menu (shutdown/restart/sleep/logout) |
 | `config/wob/` | Volume/brightness OSD bar used when Quickshell isn't running |
-| `config/swappy/` | Screenshot annotation (crop/draw/copy) — `Print`/`SUPER+Print` pipe `grim` into it |
+| `config/swappy/` | Screenshot annotation (crop/draw/copy) — `Print`/`SUPER+Print` |
 | `config/nvim/` | Neovim config: `lazy.nvim`, LSP via `mason.nvim`, `nvim-cmp` autocomplete, `nvim-tree`, Catppuccin Mocha theme |
 | `config/starship.toml` | Shell prompt |
+| `config/mimeapps.list` | `mpv` for video, `imv` for images |
 | `zshrc` | `.zshrc` |
 | `install.sh` | Installs every package below and symlinks everything into place |
 
-Press `SUPER+H` any time for the full, always-current keybind cheat-sheet (generated live from `hyprland.lua`, not a static list that can drift).
-
-## Prerequisite: a working Arch or EndeavourOS install
-
-This assumes you already have a **base Linux system booted and logged in** —
-this repo only configures the desktop on top of it, it doesn't install the OS
-itself. Two ways to get there:
-
-1. **EndeavourOS (recommended, easiest)** — download the ISO from
-   [endeavouros.com](https://endeavouros.com/), flash it to a USB drive
-   (e.g. with `dd` or [Rufus](https://rufus.ie/) on Windows), boot from it,
-   and run through the graphical installer. Pick any desktop option (or
-   "No Desktop"/terminal-only) — this repo replaces whatever DE/WM it sets
-   up. EndeavourOS ships with `yay` (AUR helper) already installed, which
-   this repo's `install.sh` needs.
-2. **Plain Arch Linux** — follow the
-   [Arch install guide](https://wiki.archlinux.org/title/Installation_guide),
-   then install an AUR helper yourself before continuing:
-   ```bash
-   sudo pacman -S --needed base-devel git
-   git clone https://aur.archlinux.org/yay.git
-   cd yay && makepkg -si
-   ```
-
-Once you can log in and reach a terminal (with internet working), continue below.
-
-## Bootstrapping on a fresh machine
-
-```bash
-git clone https://github.com/YashCube-x/My_Linux_EndourOS_Distro.git ~/dotfiles
-cd ~/dotfiles
-./install.sh
-```
-
-That's it — `install.sh` installs every package this setup needs and symlinks
-all the configs into place automatically. Reboot (or log out and back in)
-once it finishes.
-
-The script:
-1. Installs all official-repo packages via `pacman`.
-2. Installs AUR packages (`supergfxctl`, `wlogout`, `catppuccin-gtk-theme-mocha`, `catppuccin-cursors-mocha`) via `yay` — **install `yay` first** if it's not already on the machine.
-3. Symlinks each config directory from `~/dotfiles/config/` into `~/.config/`, moving anything already there into a timestamped `~/.config-backup-.../` first (never deletes).
-4. Enables the `bluetooth` and `supergfxd` system services.
-5. Sets `zsh` as the login shell if it isn't already.
-
-Because configs are **symlinked**, editing a file under `~/.config/...` after install is the same as editing it in `~/dotfiles/config/...` — commit from either place.
+Because configs are **symlinked** by `install.sh`, editing a file under
+`~/.config/...` afterward is the same as editing it in
+`~/dotfiles/config/...` — commit from either place.
 
 ## Known limitations / before reusing on a different machine or username
 
-- Four files hardcode the absolute path `/home/suyash/...`: `config/hypr/hyprpaper.conf` and three `config/quickshell/*.qml` files (`AppLauncher.qml`, `ThemeSwitcher.qml`, `shell.qml`). If you ever restore this under a **different username**, run:
+- Four files hardcode the absolute path `/home/suyash/...`: `config/hypr/hyprpaper.conf` and three `config/quickshell/*.qml` files (`AppLauncher.qml`, `ThemeSwitcher.qml`, `shell.qml`). If you restore this under a **different username**, run this before symlinking:
   ```bash
   grep -rl '/home/suyash' ~/dotfiles/config | xargs sed -i 's#/home/suyash#'"$HOME"'#g'
   ```
-  before symlinking.
 - `hyprpaper.conf` targets a specific monitor name (`eDP-1`). On different hardware, check `hyprctl monitors` and adjust.
 - Neovim plugins (via `lazy.nvim`) aren't vendored here — they install automatically the first time you launch `nvim` (needs internet).
 - Bluetooth requires the `bluetooth` service (handled by `install.sh`); the GPU switcher needs `supergfxd` (also handled) **and** actual hybrid Intel/Nvidia graphics to do anything useful.
-- GTK apps (Thunar, blueman-manager, yad, pavucontrol) use Catppuccin Mocha (blue accent) + Papirus-Dark icons + matching cursor, applied via `gsettings` (handled by `install.sh`). This isn't pixel-matched to the custom calm-slate hex palette used in the bar/launcher/lock-screen/power-menu, but it's dark and cohesive rather than the jarring default light GTK theme. Quickshell isn't affected either way — it draws its own UI directly in QML, not via system GTK/Qt theming.
+- GTK apps (Thunar, blueman-manager, yad, pavucontrol) use Catppuccin Mocha (blue accent) + Papirus-Dark icons + matching cursor, applied via `gsettings`. Not pixel-matched to the custom calm-slate hex palette used in the bar/lock-screen/power-menu, but dark and cohesive rather than the default light GTK theme. Quickshell draws its own UI in QML, so it isn't affected either way.
 
 ## Package list
 
 **Official repo:** `hyprland hyprlock hyprpaper hyprpolkitagent hypridle waybar wofi mako kitty neovim zsh starship ttf-jetbrains-mono-nerd thunar thunar-volman gvfs grim slurp swappy wf-recorder brightnessctl playerctl wob cliphist wl-clipboard blueman bluez bluez-utils quickshell jq socat yad networkmanager pavucontrol papirus-icon-theme mpv imv`
-
-`mimeapps.list` sets `mpv` as the default handler for common video formats and `imv` for images (both lightweight, Wayland-native, keyboard-driven — matches the rest of the toolchain).
 
 **AUR:** `supergfxctl wlogout catppuccin-gtk-theme-mocha catppuccin-cursors-mocha`

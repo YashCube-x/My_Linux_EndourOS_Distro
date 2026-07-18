@@ -12,6 +12,47 @@ There are two ways to set this up: **do it yourself step by step**, or
 
 ---
 
+## Color scheme — "calm slate"
+
+Base/neutral colors (bar background, workspace pills, window title):
+
+| Color | Hex | Used for |
+|---|---|---|
+| Crust | `#12141d` | Bar/lock-screen background |
+| Separator | `#2a2d3a` | Dividers, borders |
+| Muted | `#7a8296` | Inactive text, muted labels |
+| Slate blue | `#8fb0e8` | Active workspace, Hyprland active border (gradient end) |
+| Mauve | `#cba6f7` | Hyprland active border (gradient start) |
+
+Each waybar/wlogout module gets its own accent — background + a dark
+foreground (`#0d1f14`–`#241505` range) for contrast:
+
+| Module | Background | Where else it's used |
+|---|---|---|
+| Launcher / clock | `#c9b8ff` (light purple) | wlogout logout button |
+| RAM / disk | `#5ecb8a` (sage green) | — |
+| CPU | `#f0a93e` (amber) | wlogout reboot button |
+| Brightness | `#f0c65e` (yellow) | — |
+| WiFi | `#a48ff0` (purple) | — |
+| Bluetooth | `#5edfe8` (cyan) | — |
+| Volume | `#7ea6f0` (blue) | wlogout sleep button |
+| Battery / power | `#f08a94` (rose) | wlogout shutdown button |
+
+Kitty, wofi, hyprlock, and mako use the standard
+[Catppuccin Mocha](https://github.com/catppuccin/catppuccin) palette rather
+than these custom accents — close in spirit (same dark-base philosophy) but
+not pixel-matched to the table above. GTK apps (Thunar, blueman-manager,
+yad) use `catppuccin-gtk-theme-mocha` with a blue accent, applied via
+`gsettings` (see Known Limitations below for why they're not pixel-matched
+either).
+
+All the exact values live in `config/waybar/style.css` (`@define-color`
+block at the top) and `config/hypr/hyprland.lua` (`col.active_border` /
+`col.inactive_border` in the `general` section) if you want to retheme
+anything.
+
+---
+
 ## Option A: Do it yourself
 
 ### Step 1 — Install EndeavourOS

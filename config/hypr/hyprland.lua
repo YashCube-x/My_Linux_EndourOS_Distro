@@ -63,7 +63,7 @@ hl.config({
             inactive_border = "rgba(585b70aa)",
         },
 
-        resize_on_border           = true,
+        resize_on_border           = false,
         extend_border_grab_area    = 15,
         hover_icon_on_border       = true,
         allow_tearing              = false,

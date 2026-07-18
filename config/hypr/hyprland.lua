@@ -53,8 +53,8 @@ hl.env("GTK_THEME", "catppuccin-mocha-blue-standard+default")
 
 hl.config({
     general = {
-        gaps_in  = 5,
-        gaps_out = 12,
+        gaps_in  = 3,
+        gaps_out = 3,
 
         border_size = 2,
 
@@ -72,7 +72,7 @@ hl.config({
     },
 
     decoration = {
-        rounding       = 12,
+        rounding       = 4,
         rounding_power = 2,
 
         active_opacity   = 1.0,

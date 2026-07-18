@@ -25,6 +25,7 @@ local fileManager = "thunar"
 
 hl.on("hyprland.start", function()
     hl.exec_cmd("hyprpaper")
+    hl.exec_cmd("hypridle")
     hl.exec_cmd("waybar")
     hl.exec_cmd("thunar --daemon")
     hl.exec_cmd("mako")
@@ -230,6 +231,15 @@ hl.bind(mainMod .. " + bracketleft",  hl.dsp.group.prev())
 
 -- Pin a floating window on top, visible on every workspace
 hl.bind(mainMod .. " + SHIFT + P", hl.dsp.window.pin({ action = "toggle" }))
+
+-- Browse and paste clipboard history
+hl.bind(mainMod .. " + SHIFT + V", hl.dsp.exec_cmd("~/.config/waybar/scripts/clipboard_picker.sh"))
+
+-- Pick a wallpaper
+hl.bind(mainMod .. " + W", hl.dsp.exec_cmd("~/.config/hypr/scripts/wallpaper_picker.sh"))
+
+-- Show a keybind cheat-sheet
+hl.bind(mainMod .. " + H", hl.dsp.exec_cmd("~/.config/hypr/scripts/cheatsheet.sh"))
 
 -- Switch workspaces with mainMod + [0-9]
 -- Move active window to a workspace with mainMod + SHIFT + [0-9]

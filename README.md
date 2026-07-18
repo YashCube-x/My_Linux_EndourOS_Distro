@@ -51,7 +51,7 @@ Because configs are **symlinked**, editing a file under `~/.config/...` after in
 - `hyprpaper.conf` targets a specific monitor name (`eDP-1`). On different hardware, check `hyprctl monitors` and adjust.
 - Neovim plugins (via `lazy.nvim`) aren't vendored here — they install automatically the first time you launch `nvim` (needs internet).
 - Bluetooth requires the `bluetooth` service (handled by `install.sh`); the GPU switcher needs `supergfxd` (also handled) **and** actual hybrid Intel/Nvidia graphics to do anything useful.
-- `blueman-manager` and default `yad` dialogs use the system GTK theme, not the calm-slate palette — only the bar/launcher/lock-screen/power-menu are custom-themed.
+- GTK apps (Thunar, blueman-manager, yad, pavucontrol) use Catppuccin Mocha (blue accent) + Papirus-Dark icons + matching cursor, applied via `gsettings` (handled by `install.sh`). This isn't pixel-matched to the custom calm-slate hex palette used in the bar/launcher/lock-screen/power-menu, but it's dark and cohesive rather than the jarring default light GTK theme. Quickshell isn't affected either way — it draws its own UI directly in QML, not via system GTK/Qt theming.
 
 ## Package list
 

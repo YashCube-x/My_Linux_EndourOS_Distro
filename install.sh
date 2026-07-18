@@ -73,6 +73,13 @@ if [ "$SHELL" != "$(command -v zsh)" ]; then
     chsh -s "$(command -v zsh)"
 fi
 
+echo "==> Applying GTK theme/icons/cursor (Catppuccin Mocha blue + Papirus-Dark)"
+gsettings set org.gnome.desktop.interface gtk-theme "catppuccin-mocha-blue-standard+default"
+gsettings set org.gnome.desktop.interface icon-theme "Papirus-Dark"
+gsettings set org.gnome.desktop.interface cursor-theme "catppuccin-mocha-blue-cursors"
+gsettings set org.gnome.desktop.interface cursor-size 24
+gsettings set org.gnome.desktop.interface color-scheme "prefer-dark"
+
 echo "==> Done. Anything that existed before was moved to $BACKUP_DIR"
 echo "    Log out and back into Hyprland (or reboot) to pick everything up."
 echo "    Neovim plugins install automatically the first time you launch nvim."

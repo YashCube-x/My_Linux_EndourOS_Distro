@@ -1,0 +1,23 @@
+#!/bin/bash
+# Adjusts volume, then shows quickshell's native OSD if it's running,
+# or falls back to wob (used in battery-saver mode, see toggle_bar.sh).
+ACTION=$1
+
+case $ACTION in
+    up) wpctl set-volume -l 1 @DEFAULT_AUDIO_SINK@ 5%+ ;;
+    down) wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%- ;;
+    mute) wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle ;;
+esac
+
+VAL=$(wpctl get-volume @DEFAULT_AUDIO_SINK@)
+if echo "$VAL" | grep -q "MUTED"; then
+    PCT=0
+else
+    PCT=$(echo "$VAL" | LC_ALL=C awk '{print int($2 * 100)}')
+fi
+
+if pgrep -x "quickshell" > /dev/null; then
+    quickshell ipc call qsIpc showOsd V "$PCT"
+else
+    echo "$PCT" > "$XDG_RUNTIME_DIR/wob.fifo"
+fi

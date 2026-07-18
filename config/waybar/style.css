@@ -1,0 +1,201 @@
+@define-color crust      #12141d;
+@define-color separator  #2a2d3a;
+@define-color muted      #7a8296;
+
+@define-color launcher-bg   #3d2f6b;
+@define-color launcher-fg   #c9b8ff;
+
+@define-color ws-active     #8fb0e8;
+
+@define-color ram-bg    #5ecb8a;
+@define-color ram-fg    #0d1f14;
+@define-color cpu-bg    #f0a93e;
+@define-color cpu-fg    #241505;
+@define-color disk-bg   #5ecfe0;
+@define-color disk-fg   #08191c;
+
+@define-color bright-bg #f0c65e;
+@define-color bright-fg #211a04;
+@define-color wifi-bg   #a48ff0;
+@define-color wifi-fg   #1c1330;
+@define-color bt-bg     #5edfe8;
+@define-color bt-fg     #062023;
+@define-color vol-bg    #7ea6f0;
+@define-color vol-fg    #0c1c33;
+
+@define-color batt-bg   #f08a94;
+@define-color batt-fg   #2b0a0e;
+
+@define-color clock-bg  #c9b8ff;
+@define-color clock-fg  #1a1424;
+
+* {
+    font-family: "JetBrainsMono Nerd Font", "JetBrainsMono Nerd Font Mono", sans-serif;
+    font-size: 11.5px;
+    font-weight: 600;
+    min-height: 0;
+}
+
+window#waybar {
+    background: @crust;
+}
+
+/* --- Left side --- */
+
+#custom-launcher {
+    background-color: @launcher-bg;
+    color: @launcher-fg;
+    border-radius: 0;
+    font-weight: bold;
+    padding: 0;
+    margin: 0;
+    min-width: 27px;
+}
+
+#workspaces {
+    margin: 0;
+    padding: 0;
+}
+
+#workspaces button {
+    background-color: transparent;
+    color: @muted;
+    border-radius: 0;
+    padding: 0 6px;
+    margin: 0;
+}
+
+#workspaces button.active {
+    color: @ws-active;
+}
+
+#workspaces button:hover {
+    color: @launcher-fg;
+    background-color: transparent;
+}
+
+#window {
+    color: @muted;
+    border-left: 1px solid @separator;
+    padding: 0 10px;
+    margin: 0;
+}
+
+/* --- Right side: sharp-cornered, tight-padded blocks --- */
+
+#memory,
+#cpu,
+#disk,
+#custom-brightness,
+#custom-wifi,
+#custom-bluetooth,
+#custom-volume,
+#battery,
+#clock {
+    border-radius: 0;
+    padding: 0 6px;
+    margin: 0;
+}
+
+#memory {
+    background-color: @ram-bg;
+    color: @ram-fg;
+}
+
+#cpu {
+    background-color: @cpu-bg;
+    color: @cpu-fg;
+}
+
+#disk {
+    background-color: @disk-bg;
+    color: @disk-fg;
+}
+
+#custom-brightness {
+    background-color: @bright-bg;
+    color: @bright-fg;
+}
+
+#custom-wifi {
+    background-color: @wifi-bg;
+    color: @wifi-fg;
+}
+
+#custom-wifi.off,
+#custom-wifi.disconnected {
+    background-color: @separator;
+    color: @muted;
+}
+
+#custom-bluetooth {
+    background-color: @bt-bg;
+    color: @bt-fg;
+}
+
+#custom-bluetooth.off {
+    background-color: @separator;
+    color: @muted;
+}
+
+#custom-volume {
+    background-color: @vol-bg;
+    color: @vol-fg;
+}
+
+#battery {
+    background-color: @batt-bg;
+    color: @batt-fg;
+}
+
+#battery.charging {
+    background-color: @ram-bg;
+    color: @ram-fg;
+}
+
+#battery.warning:not(.charging) {
+    background-color: @cpu-bg;
+    color: @cpu-fg;
+}
+
+#battery.critical:not(.charging) {
+    background-color: @batt-bg;
+    color: @batt-fg;
+}
+
+#clock {
+    background-color: @clock-bg;
+    color: @clock-fg;
+}
+
+/* Power button: sharp corners, filled per spec */
+#custom-power {
+    background-color: @batt-bg;
+    color: @batt-fg;
+    border-radius: 0;
+    padding: 0 8px;
+    margin: 0;
+}
+
+/* Notification toggle: no fill, muted icon, only shown if mako is installed */
+#custom-notification {
+    background-color: @crust;
+    color: @muted;
+    border-radius: 0;
+    padding: 0 8px;
+    margin: 0;
+}
+
+#custom-notification.dnd {
+    color: @batt-bg;
+}
+
+tooltip {
+    background: @crust;
+    border: 1px solid @separator;
+    border-radius: 0;
+}
+
+tooltip label {
+    color: #c5cadd;
+}

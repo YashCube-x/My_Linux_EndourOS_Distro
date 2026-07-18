@@ -211,6 +211,24 @@ hl.bind(mainMod .. " + ALT + right", hl.dsp.window.resize({ x = 20,  y = 0,  rel
 hl.bind(mainMod .. " + ALT + up",    hl.dsp.window.resize({ x = 0,  y = -20, relative = true }), { repeating = true })
 hl.bind(mainMod .. " + ALT + down",  hl.dsp.window.resize({ x = 0,  y = 20,  relative = true }), { repeating = true })
 
+-- Swap the active window with the one in a direction (position, not focus)
+hl.bind(mainMod .. " + CTRL + left",  hl.dsp.window.swap({ direction = "left" }))
+hl.bind(mainMod .. " + CTRL + right", hl.dsp.window.swap({ direction = "right" }))
+hl.bind(mainMod .. " + CTRL + up",    hl.dsp.window.swap({ direction = "up" }))
+hl.bind(mainMod .. " + CTRL + down",  hl.dsp.window.swap({ direction = "down" }))
+
+-- Cycle focus through all windows without needing a direction
+hl.bind(mainMod .. " + Tab",         hl.dsp.window.cycle_next({ next = true }))
+hl.bind(mainMod .. " + SHIFT + Tab", hl.dsp.window.cycle_next({ next = false }))
+
+-- Group windows into a tabbed stack, cycle the active tab
+hl.bind(mainMod .. " + G",           hl.dsp.group.toggle())
+hl.bind(mainMod .. " + bracketright", hl.dsp.group.next())
+hl.bind(mainMod .. " + bracketleft",  hl.dsp.group.prev())
+
+-- Pin a floating window on top, visible on every workspace
+hl.bind(mainMod .. " + SHIFT + P", hl.dsp.window.pin({ action = "toggle" }))
+
 -- Switch workspaces with mainMod + [0-9]
 -- Move active window to a workspace with mainMod + SHIFT + [0-9]
 for i = 1, 10 do

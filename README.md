@@ -8,18 +8,21 @@ Neovim + zsh/Starship, all on one consistent "calm slate" color palette.
 
 | Path | What it is |
 |---|---|
-| `config/hypr/` | `hyprland.lua` (compositor config, keybinds, animations, blur), `hyprlock.conf`, `hyprpaper.conf`, `scripts/` (smart volume/brightness/menu/powermenu wrappers), `wallpaper/` |
-| `config/waybar/` | Bar config + calm-slate `style.css` + `scripts/` (volume/brightness sliders via `yad`, WiFi popup via `nmcli`+`wofi`, notification toggle) |
+| `config/hypr/` | `hyprland.lua` (compositor config, 80+ keybinds, animations, blur, tiling controls), `hyprlock.conf`, `hyprpaper.conf`, `hypridle.conf` (auto lock/dim/suspend), `scripts/` (smart volume/brightness/menu/powermenu wrappers, wallpaper picker, keybind cheat-sheet, battery warning, screen-record toggle), `wallpaper/` (4 wallpapers, switch with `SUPER+W`) |
+| `config/waybar/` | Bar config + calm-slate `style.css` + `scripts/` (volume/brightness sliders via `yad`, WiFi popup via `nmcli`+`wofi`, clipboard picker via `cliphist`, notification toggle) |
 | `config/kitty/` | Terminal config, Catppuccin Mocha colors, JetBrains Mono Nerd Font |
 | `config/wofi/` | App launcher styling |
 | `config/mako/` | Notification daemon styling |
 | `config/quickshell/` | Alternate native shell (QML) — control center, OSD, GPU switcher, clipboard manager. Toggle with `SUPER+SHIFT+Q` or the waybar power-menu's "battery mode" button. Adapted from [matteogini/dotfiles](https://github.com/matteogini/dotfiles). |
 | `config/wlogout/` | Centered 4-option power menu (shutdown/restart/sleep/logout) |
 | `config/wob/` | Volume/brightness OSD bar used when Quickshell isn't running |
+| `config/swappy/` | Screenshot annotation (crop/draw/copy) — `Print`/`SUPER+Print` pipe `grim` into it |
 | `config/nvim/` | Neovim config: `lazy.nvim`, LSP via `mason.nvim`, `nvim-cmp` autocomplete, `nvim-tree`, Catppuccin Mocha theme |
 | `config/starship.toml` | Shell prompt |
 | `zshrc` | `.zshrc` |
 | `install.sh` | Installs every package below and symlinks everything into place |
+
+Press `SUPER+H` any time for the full, always-current keybind cheat-sheet (generated live from `hyprland.lua`, not a static list that can drift).
 
 ## Bootstrapping on a fresh machine
 
@@ -31,7 +34,7 @@ cd ~/dotfiles
 
 The script:
 1. Installs all official-repo packages via `pacman`.
-2. Installs AUR packages (`supergfxctl`, `wlogout`) via `yay` — **install `yay` first** if it's not already on the machine.
+2. Installs AUR packages (`supergfxctl`, `wlogout`, `catppuccin-gtk-theme-mocha`, `catppuccin-cursors-mocha`) via `yay` — **install `yay` first** if it's not already on the machine.
 3. Symlinks each config directory from `~/dotfiles/config/` into `~/.config/`, moving anything already there into a timestamped `~/.config-backup-.../` first (never deletes).
 4. Enables the `bluetooth` and `supergfxd` system services.
 5. Sets `zsh` as the login shell if it isn't already.
@@ -52,6 +55,6 @@ Because configs are **symlinked**, editing a file under `~/.config/...` after in
 
 ## Package list
 
-**Official repo:** `hyprland hyprlock hyprpaper hyprpolkitagent waybar wofi mako kitty neovim zsh starship ttf-jetbrains-mono-nerd thunar thunar-volman gvfs grim slurp brightnessctl playerctl wob cliphist wl-clipboard blueman bluez bluez-utils quickshell jq socat yad networkmanager pavucontrol`
+**Official repo:** `hyprland hyprlock hyprpaper hyprpolkitagent hypridle waybar wofi mako kitty neovim zsh starship ttf-jetbrains-mono-nerd thunar thunar-volman gvfs grim slurp swappy wf-recorder brightnessctl playerctl wob cliphist wl-clipboard blueman bluez bluez-utils quickshell jq socat yad networkmanager pavucontrol papirus-icon-theme`
 
-**AUR:** `supergfxctl wlogout`
+**AUR:** `supergfxctl wlogout catppuccin-gtk-theme-mocha catppuccin-cursors-mocha`

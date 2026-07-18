@@ -242,6 +242,9 @@ hl.bind(mainMod .. " + W", hl.dsp.exec_cmd("~/.config/hypr/scripts/wallpaper_pic
 -- Show a keybind cheat-sheet
 hl.bind(mainMod .. " + H", hl.dsp.exec_cmd("~/.config/hypr/scripts/cheatsheet.sh"))
 
+-- Toggle screen recording (same key starts and stops)
+hl.bind(mainMod .. " + ALT + R", hl.dsp.exec_cmd("~/.config/hypr/scripts/screenrecord_toggle.sh"))
+
 -- Switch workspaces with mainMod + [0-9]
 -- Move active window to a workspace with mainMod + SHIFT + [0-9]
 for i = 1, 10 do
@@ -273,9 +276,9 @@ hl.bind(mainMod .. " + SHIFT + Q", hl.dsp.exec_cmd("~/.config/quickshell/toggle_
 -- Power menu (quickshell's native menu, or wofi fallback in battery mode)
 hl.bind(mainMod .. " + Escape", hl.dsp.exec_cmd("~/.config/hypr/scripts/smart_powermenu.sh"))
 
--- Screenshots
-hl.bind("Print",              hl.dsp.exec_cmd("mkdir -p ~/Pictures/Screenshots && grim ~/Pictures/Screenshots/$(date +%s).png"))
-hl.bind(mainMod .. " + Print", hl.dsp.exec_cmd("mkdir -p ~/Pictures/Screenshots && grim -g \"$(slurp)\" ~/Pictures/Screenshots/$(date +%s).png"))
+-- Screenshots (grim | swappy: annotate/crop, then save or copy from the panel)
+hl.bind("Print",              hl.dsp.exec_cmd("mkdir -p ~/Pictures/Screenshots && grim - | swappy -f -"))
+hl.bind(mainMod .. " + Print", hl.dsp.exec_cmd("mkdir -p ~/Pictures/Screenshots && grim -g \"$(slurp)\" - | swappy -f -"))
 
 -- Laptop multimedia keys for volume and LCD brightness (smart: quickshell OSD or wob fallback)
 hl.bind("XF86AudioRaiseVolume",  hl.dsp.exec_cmd("~/.config/hypr/scripts/smart_volume.sh up"),     { locked = true, repeating = true })

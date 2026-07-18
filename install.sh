@@ -8,17 +8,18 @@ CONFIG_SRC="$DOTFILES_DIR/config"
 BACKUP_DIR="$HOME/.config-backup-$(date +%Y%m%d-%H%M%S)"
 
 OFFICIAL_PKGS=(
-    hyprland hyprlock hyprpaper hyprpolkitagent
+    hyprland hyprlock hyprpaper hyprpolkitagent hypridle
     waybar wofi mako
     kitty neovim zsh starship ttf-jetbrains-mono-nerd
     thunar thunar-volman gvfs
-    grim slurp brightnessctl playerctl wob
+    grim slurp swappy wf-recorder brightnessctl playerctl wob
     cliphist wl-clipboard
     blueman bluez bluez-utils
     quickshell jq socat
     yad networkmanager pavucontrol
+    papirus-icon-theme
 )
-AUR_PKGS=(supergfxctl wlogout)
+AUR_PKGS=(supergfxctl wlogout catppuccin-gtk-theme-mocha catppuccin-cursors-mocha)
 
 echo "==> Installing official-repo packages"
 sudo pacman -S --needed "${OFFICIAL_PKGS[@]}"
@@ -45,7 +46,7 @@ link_config() {
     echo "  linked $name"
 }
 
-for name in hypr waybar kitty wofi mako quickshell wlogout wob nvim; do
+for name in hypr waybar kitty wofi mako quickshell wlogout wob nvim swappy; do
     link_config "$name"
 done
 

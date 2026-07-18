@@ -18,6 +18,7 @@ OFFICIAL_PKGS=(
     quickshell jq socat
     yad networkmanager pavucontrol
     papirus-icon-theme
+    mpv imv
 )
 AUR_PKGS=(supergfxctl wlogout catppuccin-gtk-theme-mocha catppuccin-cursors-mocha)
 
@@ -61,6 +62,12 @@ if [ -e "$HOME/.zshrc" ] || [ -L "$HOME/.zshrc" ]; then
 fi
 ln -s "$DOTFILES_DIR/zshrc" "$HOME/.zshrc"
 echo "  linked .zshrc"
+
+if [ -e "$HOME/.config/mimeapps.list" ] || [ -L "$HOME/.config/mimeapps.list" ]; then
+    mv "$HOME/.config/mimeapps.list" "$BACKUP_DIR/mimeapps.list"
+fi
+ln -s "$CONFIG_SRC/mimeapps.list" "$HOME/.config/mimeapps.list"
+echo "  linked mimeapps.list (mpv for video, imv for images)"
 
 echo "==> Enabling required system services"
 sudo systemctl enable --now bluetooth

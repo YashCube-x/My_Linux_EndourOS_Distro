@@ -55,6 +55,8 @@ Because configs are **symlinked**, editing a file under `~/.config/...` after in
 
 ## Package list
 
-**Official repo:** `hyprland hyprlock hyprpaper hyprpolkitagent hypridle waybar wofi mako kitty neovim zsh starship ttf-jetbrains-mono-nerd thunar thunar-volman gvfs grim slurp swappy wf-recorder brightnessctl playerctl wob cliphist wl-clipboard blueman bluez bluez-utils quickshell jq socat yad networkmanager pavucontrol papirus-icon-theme`
+**Official repo:** `hyprland hyprlock hyprpaper hyprpolkitagent hypridle waybar wofi mako kitty neovim zsh starship ttf-jetbrains-mono-nerd thunar thunar-volman gvfs grim slurp swappy wf-recorder brightnessctl playerctl wob cliphist wl-clipboard blueman bluez bluez-utils quickshell jq socat yad networkmanager pavucontrol papirus-icon-theme mpv imv`
+
+`mimeapps.list` sets `mpv` as the default handler for common video formats and `imv` for images (both lightweight, Wayland-native, keyboard-driven — matches the rest of the toolchain).
 
 **AUR:** `supergfxctl wlogout catppuccin-gtk-theme-mocha catppuccin-cursors-mocha`
